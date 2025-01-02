@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.AzureServiceBus", "projects\Testing.AzureServiceBus\Testing.AzureServiceBus.csproj", "{CC031221-F9F1-46AC-B13F-443FDBAAC8E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D76D284A-83FE-4421-B4DE-351F4F2F7297}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBenchApi", "projects\TestBenchApi\TestBenchApi.csproj", "{C99E11BE-6B62-4D7B-AFF9-39912B241644}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBenchApi.Tests", "projects\TestBenchApi.Tests\TestBenchApi.Tests.csproj", "{9C6C5022-4B3A-4EEB-A84B-00C6684B3DE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC031221-F9F1-46AC-B13F-443FDBAAC8E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC031221-F9F1-46AC-B13F-443FDBAAC8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC031221-F9F1-46AC-B13F-443FDBAAC8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC031221-F9F1-46AC-B13F-443FDBAAC8E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C99E11BE-6B62-4D7B-AFF9-39912B241644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C99E11BE-6B62-4D7B-AFF9-39912B241644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C99E11BE-6B62-4D7B-AFF9-39912B241644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C99E11BE-6B62-4D7B-AFF9-39912B241644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C6C5022-4B3A-4EEB-A84B-00C6684B3DE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C6C5022-4B3A-4EEB-A84B-00C6684B3DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C6C5022-4B3A-4EEB-A84B-00C6684B3DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C6C5022-4B3A-4EEB-A84B-00C6684B3DE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C99E11BE-6B62-4D7B-AFF9-39912B241644} = {D76D284A-83FE-4421-B4DE-351F4F2F7297}
+		{9C6C5022-4B3A-4EEB-A84B-00C6684B3DE7} = {D76D284A-83FE-4421-B4DE-351F4F2F7297}
+	EndGlobalSection
+EndGlobal
