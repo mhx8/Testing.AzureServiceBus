@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Azure;
+﻿using Azure.Messaging.ServiceBus;
+using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Testing.AzureServiceBus;
 
@@ -9,6 +11,8 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         Action<ServiceBusEmulatorBuilder> builder)
     {
+        services.RemoveAll(typeof(ServiceBusProcessor));
+        services.RemoveAll(typeof(ServiceBusSender));
         services.AddAzureClients(
             clientBuilder =>
             {

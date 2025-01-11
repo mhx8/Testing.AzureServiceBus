@@ -34,7 +34,7 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
                             "testqueue")
                         .AddProcessor(
                             "TopicProcessor",
-                            "testqueue",
+                            "testtopic",
                             "testsubscription"));
             });
     }

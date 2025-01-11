@@ -7,7 +7,7 @@ using ServiceBusConfiguration = Testing.AzureServiceBus.Configuration.ServiceBus
 
 namespace Testing.AzureServiceBus;
 
-public class ServiceBusFixture : IAsyncDisposable
+public class ServiceBusResource : IAsyncDisposable
 {
     private ServiceBusContainer? _serviceBusContainer;
     private ILogger? _logger;
@@ -19,14 +19,14 @@ public class ServiceBusFixture : IAsyncDisposable
         ServiceBusConfiguration serviceBusConfiguration,
         ITestOutputHelper testOutputHelper)
     {
+        _logger = new XunitLogger<ServiceBusResource>(testOutputHelper);
+        
         if (_isInitialized)
         {
             return;
         }
 
-        _logger = new XunitLogger<ServiceBusFixture>(testOutputHelper);
         FileUtils.SaveUserConfig(serviceBusConfiguration);
-
         _serviceBusContainer =
             new ServiceBusBuilder()
                 .WithAcceptLicenseAgreement(true)

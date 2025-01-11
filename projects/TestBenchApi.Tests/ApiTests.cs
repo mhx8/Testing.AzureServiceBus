@@ -11,24 +11,24 @@ using Xunit.Abstractions;
 
 namespace TestBenchApi.Tests;
 
-public class ApiTests : IClassFixture<CustomWebApplicationFactory<IApiAssemblyMarker>>, IClassFixture<ServiceBusFixture>
+public class ApiTests : IClassFixture<CustomWebApplicationFactory<IApiAssemblyMarker>>, IClassFixture<ServiceBusResource>
 {
-    private readonly ServiceBusFixture _serviceBusFixture;
+    private readonly ServiceBusResource _serviceBusResource;
     private readonly CustomWebApplicationFactory<IApiAssemblyMarker> _webApplicationFactory;
 
     public ApiTests(
         CustomWebApplicationFactory<IApiAssemblyMarker> webApplicationFactory,
-        ServiceBusFixture serviceBusFixture,
+        ServiceBusResource serviceBusResource,
         ITestOutputHelper testOutputHelper)
     {
-        ArgumentNullException.ThrowIfNull(serviceBusFixture);
+        ArgumentNullException.ThrowIfNull(serviceBusResource);
 
-        serviceBusFixture.Initialize(
+        serviceBusResource.Initialize(
             ServiceBusConfig(),
             testOutputHelper);
 
         _webApplicationFactory = webApplicationFactory;
-        _serviceBusFixture = serviceBusFixture;
+        _serviceBusResource = serviceBusResource;
     }
 
     [Fact]
@@ -45,7 +45,7 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<IApiAssemblyMa
         // Assert
         responseMessage.EnsureSuccessStatusCode();
 
-        CloudEvent message = await _serviceBusFixture.ConsumeMessageAsync<CloudEvent>("testqueue");
+        CloudEvent message = await _serviceBusResource.ConsumeMessageAsync<CloudEvent>("testqueue");
         Assert.NotNull(message);
         Assert.NotNull(message.Data);
 
@@ -71,7 +71,7 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<IApiAssemblyMa
         // Assert
         responseMessage.EnsureSuccessStatusCode();
 
-        CloudEvent message = await _serviceBusFixture.ConsumeMessageAsync<CloudEvent>(
+        CloudEvent message = await _serviceBusResource.ConsumeMessageAsync<CloudEvent>(
             "testtopic",
             "testsubscription");
         Assert.NotNull(message);
@@ -99,7 +99,7 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<IApiAssemblyMa
         // Assert
         responseMessage.EnsureSuccessStatusCode();
 
-        CloudEvent message = await _serviceBusFixture.ConsumeMessageAsync<CloudEvent>(
+        CloudEvent message = await _serviceBusResource.ConsumeMessageAsync<CloudEvent>(
             "testtopic",
             "testsubscriptionwithrule");
         Assert.NotNull(message);
@@ -117,7 +117,7 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<IApiAssemblyMa
     public async Task TestProcessQueueMessage()
     {
         // Arrange
-        await _serviceBusFixture.PublishMessageAsync(
+        await _serviceBusResource.PublishMessageAsync(
             "testqueue",
             new ServiceBusMessage("Hello World!"));
         HttpClient httpClient = _webApplicationFactory.CreateClient();
@@ -135,14 +135,14 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<IApiAssemblyMa
     public async Task TestProcessTopicMessage()
     {
         // Arrange
-        await _serviceBusFixture.PublishMessageAsync(
+        await _serviceBusResource.PublishMessageAsync(
             "testqueue",
             new ServiceBusMessage("Hello World!"));
         HttpClient httpClient = _webApplicationFactory.CreateClient();
 
         // Act
         HttpResponseMessage responseMessage = await httpClient.PostAsync(
-            "api/process/queue",
+            "api/process/topic",
             null);
 
         // Assert
